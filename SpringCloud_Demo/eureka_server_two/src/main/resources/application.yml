@@ -1,0 +1,12 @@
+server:
+  port: 8000
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9000/eureka/
+  server:
+    enable-self-preservation: true #关闭自我保护
+    eviction-interval-timer-in-ms: 4000   #剔除服务间隔
+  #register-with-eureka: false #是否将自己注册到注册中心
+    #fetch-registry: false #是否自己获取注册信息
+
