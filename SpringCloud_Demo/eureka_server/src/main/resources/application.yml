@@ -1,11 +1,9 @@
 server:
-  port: 9000
+  port: 8000 # 端口
+spring:
+  application:
+    name: eurekaserverdemo # 应用名称，会在Eureka中显示
 eureka:
   client:
-    #register-with-eureka: false #是否将自己注册到注册中心
-    #fetch-registry: false #是否自己获取注册信息
-    server-url: #配置暴露给eureka Client 的请求地址
-      defaultZone: http://127.0.0.1:8000/eureka/
-  server:
-    enable-self-preservation: true #关闭自我保护
-    eviction-interval-timer-in-ms: 4000   #剔除服务间隔
+    service-url: # EurekaServer的地址，现在是自己的地址，如果是集群，需要加上其它Server的地址。
+      defaultZone: http://127.0.0.1:9000/eureka/

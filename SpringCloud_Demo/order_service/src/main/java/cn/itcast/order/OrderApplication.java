@@ -4,6 +4,7 @@ package cn.itcast.order;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
@@ -12,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 @EntityScan("cn.itcast.order.entity")
 public class OrderApplication {
 
-
+    @LoadBalanced
     @Bean
     public RestTemplate restTemplate() {
        return  new RestTemplate();
