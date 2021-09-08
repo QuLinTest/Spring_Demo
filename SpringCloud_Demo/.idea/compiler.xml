@@ -7,15 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="eureka_server" />
         <module name="order_service" />
         <module name="import_test" />
         <module name="product_service" />
-      </profile>
-      <profile name="Annotation profile for SpringCloud_Demo" enabled="true">
-        <sourceOutputDir name="../eureka_server_two/target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../eureka_server_two/target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="eureka_server" />
       </profile>
     </annotationProcessing>
   </component>
