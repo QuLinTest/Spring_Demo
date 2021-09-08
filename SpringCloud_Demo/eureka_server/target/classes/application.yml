@@ -1,8 +1,0 @@
-server:
-  port: 9000
-eureka:
-  client:
-    register-with-eureka: false #是否将自己注册到注册中心
-    fetch-registry: false #是否自己获取注册信息
-    server-url: #配置暴露给eureka Client 的请求地址
-      defaultZone: http://127.0.0.1:8000/eureka/
