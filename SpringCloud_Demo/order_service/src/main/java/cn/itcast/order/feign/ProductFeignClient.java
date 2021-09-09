@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @FeignClient(name = "service-product")
 public interface ProductFeignClient {
-
     /**
      *
      * 配置需要调用的微服务接口

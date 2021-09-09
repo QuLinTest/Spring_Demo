@@ -1,6 +1,8 @@
 package cn.itcast.order.contorller;
 
 
+
+import cn.itcast.order.command.OrderCommand;
 import cn.itcast.order.entity.Product;
 import cn.itcast.order.feign.ProductFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +29,40 @@ public class OrderContorller {
     @Autowired
     private ProductFeignClient productFeignClient;
 
+    /**
+     * 线程池
+     * @param id
+     * @return
+     */
 
-    @RequestMapping(value = "/buy/{id}",method = RequestMethod.GET)
+
+     @RequestMapping(value = "/buy/{id}",method = RequestMethod.GET)
+    public Product findById(@PathVariable Long id){
+         return   new OrderCommand(restTemplate,id).execute();
+
+    }
+    /**
+     * feign方式
+     * @param id
+     * @return
+     */
+   /* @RequestMapping(value = "/buy/{id}",method = RequestMethod.GET)
     public Product findById(@PathVariable Long id){
         Product product =null;
 
         product=productFeignClient.findById(id);
         return product;
+    }*/
+
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    public String findOrderId(@PathVariable Long id){
+        return "根据ID查询";
+
     }
 
+    /**
+     * restTemplete+ribbon方式请求访问
+     */
   /*  @RequestMapping(value = "/buy/{id}",method = RequestMethod.GET)
     public Product findById(@PathVariable Long id){
         Product product =null;
@@ -44,7 +71,9 @@ public class OrderContorller {
         return product;
     }*/
 
-
+/**
+ * restTemplete方式请求访问
+ */
   /*  @RequestMapping(value = "/buy/{id}",method = RequestMethod.GET)
     public Product findById(@PathVariable Long id){
         Product product =null;

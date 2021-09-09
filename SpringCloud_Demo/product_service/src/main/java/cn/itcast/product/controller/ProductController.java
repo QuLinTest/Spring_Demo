@@ -20,9 +20,12 @@ public class ProductController {
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public Product findById(@PathVariable Long id){
-        Product product=  productService.findById(id);
-        product.setProductName("本次访问IP"+ip+":"+port);
-        System.out.println();
+        Product product=null;
+
+//            Thread.sleep(200l);
+             product=  productService.findById(id);
+            product.setProductName("本次访问IP"+ip+":"+port);
+
 
         return product;
     }
