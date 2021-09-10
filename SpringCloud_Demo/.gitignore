@@ -7,16 +7,16 @@
 out
 gen
 # Compiled class file
-*/**/*.class
 # Log file
 *.log
-
+/target
 # BlueJ files
 *.ctxt
-
+*.class
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+target/
 # Package Files #
 *.jar
 *.war

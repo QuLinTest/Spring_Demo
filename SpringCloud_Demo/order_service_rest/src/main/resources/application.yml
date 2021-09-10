@@ -1,0 +1,32 @@
+server:
+  port: 9101
+  tomcat:
+    max-threads: 10
+spring:
+  application:
+    name: service-order
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/shop?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT
+    username: root
+    password: 123456
+  jpa:
+    database: MySQL
+    show-sql: true
+    open-in-view: true
+eureka: #配置引导eureka配置
+  client:
+    service-url:
+      defaultZone : http://localhost:9000/eureka/,http://localhost:8000/eureka/
+  instance:
+    prefer-ip-address : true #使用IP地址注册
+
+###配置feign配置日志输出
+feign:
+  client:
+    config:
+      service-product:
+        loggerLevel: FULL
+logging:
+  level:
+    cn.itcast.order.feign.ProductFeignClient: debug
