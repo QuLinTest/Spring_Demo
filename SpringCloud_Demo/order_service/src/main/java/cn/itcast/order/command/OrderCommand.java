@@ -54,6 +54,7 @@ public class OrderCommand extends HystrixCommand<Product> {
 	@Override
 	protected Product getFallback(){
 		Product product = new Product();
+		//服务降级 未获取到数据，自己模拟一套数据反馈给client
 		try {
 
 			product.setProductDesc("error");

@@ -22,8 +22,12 @@ public class ProductController {
     public Product findById(@PathVariable Long id){
         Product product=null;
 
-//            Thread.sleep(200l);
-             product=  productService.findById(id);
+        try {
+            Thread.sleep(200l);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        product=  productService.findById(id);
             product.setProductName("本次访问IP"+ip+":"+port);
 
 
