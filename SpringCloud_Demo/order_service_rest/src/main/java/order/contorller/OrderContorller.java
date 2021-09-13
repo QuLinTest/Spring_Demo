@@ -2,6 +2,7 @@ package order.contorller;
 
 
 
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.utils.FallbackMethod;
 import order.command.OrderCommand;
@@ -19,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/order")
+@DefaultProperties(defaultFallback = "orderGetFallBack")
 public class OrderContorller {
 
     @Autowired
@@ -28,7 +30,7 @@ public class OrderContorller {
 
 
 
-    @HystrixCommand(fallbackMethod = "orderGetFallBack")
+    @HystrixCommand
    @RequestMapping(value = "/buy/{id}",method = RequestMethod.GET)
     public Product findById(@PathVariable Long id){
         Product product =null;
@@ -38,13 +40,13 @@ public class OrderContorller {
     }
 
     /**
-     * 降级方法，需要和触发保护的方法参数一致，返回值一致
-     * @param id
+     * 公共的降级方法
+     * @param
      * @return
      */
-    public  Product orderGetFallBack(@PathVariable Long id){
+    public  Product orderGetFallBack(){
         Product product = new Product();
-        product.setProductDesc("123111");
+        product.setProductDesc("查询出问题了，可能没有这个东西");
         return  product;
     }
     /**
