@@ -4,7 +4,7 @@ server:
     max-threads: 10
 spring:
   application:
-    name: service-order
+    name: service-order-rest
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/shop?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT
@@ -27,6 +27,25 @@ feign:
     config:
       service-product:
         loggerLevel: FULL
+  hystrix:
+    enabled: true
 logging:
   level:
     cn.itcast.order.feign.ProductFeignClient: debug
+
+hystrix:
+  command:
+    default:
+      exection:
+        isolaton:
+          thread:
+            timeoutInmilliseconds: 3000 #默认的连接超时时间是1S，如果没有返回数据，就触发熔断降级
+      circuitBreaker:
+        requestVolumeThreshold: 10 #触发熔断的最小请求次数，默认20
+        errorThresholdPercentage: 50 #触发熔断的失败请求最小占比，默认50%
+        sleepWindowInMilliseconds: 10000 #熔断多少秒后去尝试请求
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

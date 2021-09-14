@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * 声明需要调用的微服务名称
  * name : 服务名称
+ * fallback: 熔断降级触发，就会跳到那个ProductFeignClientCallcopy的方法去
  */
-@FeignClient(name = "service-product")
+@FeignClient(name = "service-product",fallback =ProductFeignClientCallcopy.class)
 public interface ProductFeignClient {
     /**
      *

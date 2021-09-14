@@ -14,6 +14,7 @@
         <module>eureka_server</module>
         <module>import_test</module>
         <module>order_service_rest</module>
+        <module>hystrix_turbine</module>
     </modules>
 
     <parent>

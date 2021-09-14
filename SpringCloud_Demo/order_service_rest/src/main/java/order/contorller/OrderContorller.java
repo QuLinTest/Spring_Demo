@@ -9,7 +9,9 @@ import order.command.OrderCommand;
 import order.entity.Product;
 
 import order.feign.ProductFeignClient;
+import order.feign.ProductFeignClientCallcopy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.openfeign.support.FallbackCommand;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +22,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/order")
-@DefaultProperties(defaultFallback = "orderGetFallBack")
+//@DefaultProperties(defaultFallback = "orderGetFallBack")
 public class OrderContorller {
 
     @Autowired
@@ -28,39 +30,41 @@ public class OrderContorller {
     @Autowired
     private DiscoveryClient discoveryClient;
 
+    @Autowired
+    private ProductFeignClient productFeignClient;
 
 
-    @HystrixCommand
-   @RequestMapping(value = "/buy/{id}",method = RequestMethod.GET)
-    public Product findById(@PathVariable Long id){
-        Product product =null;
-
-        product=restTemplate.getForObject("http://service-product/product/"+id,Product.class);
-        return product;
-    }
+//    @HystrixCommand
+//   @RequestMapping(value = "/buy/{id}",method = RequestMethod.GET)
+//    public Product findById(@PathVariable Long id){
+//        Product product =null;
+//
+//        product=restTemplate.getForObject("http://service-product/product/"+id,Product.class);
+//        return product;
+//    }
 
     /**
-     * 公共的降级方法
+     * 公共的降级方法；如果一旦熔断，所有的报错就会进去这个方法中
      * @param
      * @return
      */
-    public  Product orderGetFallBack(){
-        Product product = new Product();
-        product.setProductDesc("查询出问题了，可能没有这个东西");
-        return  product;
-    }
+//    public  Product orderGetFallBack(){
+//        Product product = new Product();
+//        product.setProductDesc("查询出问题了，可能没有这个东西");
+//        return  product;
+//    }
     /**
      * feign方式
      * @param id
      * @return
      */
-   /* @RequestMapping(value = "/buy/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/buy/{id}",method = RequestMethod.GET)
     public Product findById(@PathVariable Long id){
         Product product =null;
 
         product=productFeignClient.findById(id);
         return product;
-    }*/
+    }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public String findOrderId(@PathVariable Long id){
