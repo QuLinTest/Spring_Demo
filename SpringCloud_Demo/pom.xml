@@ -15,6 +15,9 @@
         <module>import_test</module>
         <module>order_service_rest</module>
         <module>hystrix_turbine</module>
+        <module>zuul_server</module>
+        <module>gateway_server</module>
+        <module>gateway_server</module>
     </modules>
 
     <parent>
@@ -32,10 +35,7 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+     
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
