@@ -1,0 +1,26 @@
+server:
+  port: 8100
+  tomcat:
+    max-threads: 10
+spring:
+  application:
+    name: service-zuul
+
+zuul:
+  routes:
+    service-product:
+    service-order:
+  host:
+    connect-timeout-millis: 3000
+    socket-timeout-millis: 3000
+
+eureka: #配置引导eureka配置
+    client:
+      service-url:
+        defaultZone: http://localhost:8000/eureka/
+    instance:
+      prefer-ip-address: true #使用IP地址注册
+# 添加ribbon的超时时间设置
+ribbon:
+  ReadTimeout: 3000
+  ConnectTimeout: 3000
