@@ -1,0 +1,23 @@
+server:
+  port: 8200
+  tomcat:
+    max-threads: 10
+spring:
+  application:
+    name: service-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: product-service
+          #uri: http://127.0.0.1:9005
+          uri: lb://service-order
+          predicates:
+            - Path=/service-order/**
+          filters:
+            - RewritePath=/service-order/(?<segment>.*), /$\{segment}
+eureka: #配置引导eureka配置
+    client:
+      service-url:
+        defaultZone: http://localhost:8000/eureka/
+    instance:
+      prefer-ip-address: true #使用IP地址注册
